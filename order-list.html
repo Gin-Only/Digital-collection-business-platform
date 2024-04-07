@@ -166,11 +166,11 @@
                     <td>我是图片</td>
                     <td>我是审核状态</td>
                     <!-- <td>待确认</td>
-                                                                            <td>未支付</td>
-                                                                            <td>未发货</td>
-                                                                            <td>其他方式</td>
-                                                                            <td>申通物流</td>
-                                                                            <td>2017-08-17 18:22</td> -->
+                    <td>未支付</td>
+                    <td>未发货</td>
+                    <td>其他方式</td>
+                    <td>申通物流</td>
+                    <td>2017-08-17 18:22</td> -->
                     <td class="td-manage">
                       <a
                         title="查看"
@@ -276,38 +276,38 @@
         });
       }
 
-      layer.confirm("确认要停用吗？", function (index) {
-        if ($(obj).attr("title") == "启用") {
-          //发异步把用户状态进行更改
-          $(obj).attr("title", "停用");
-          $(obj).find("i").html("&#xe62f;");
+      // layer.confirm("确认要停用吗？", function (index) {
+      //   if ($(obj).attr("title") == "启用") {
+      //     //发异步把用户状态进行更改
+      //     $(obj).attr("title", "停用");
+      //     $(obj).find("i").html("&#xe62f;");
 
-          $(obj)
-            .parents("tr")
-            .find(".td-status")
-            .find("span")
-            .addClass("layui-btn-disabled")
-            .html("已停用");
-          layer.msg("已停用!", {
-            icon: 5,
-            time: 1000,
-          });
-        } else {
-          $(obj).attr("title", "启用");
-          $(obj).find("i").html("&#xe601;");
+      //     $(obj)
+      //       .parents("tr")
+      //       .find(".td-status")
+      //       .find("span")
+      //       .addClass("layui-btn-disabled")
+      //       .html("已停用");
+      //     layer.msg("已停用!", {
+      //       icon: 5,
+      //       time: 1000,
+      //     });
+      //   } else {
+      //     $(obj).attr("title", "启用");
+      //     $(obj).find("i").html("&#xe601;");
 
-          $(obj)
-            .parents("tr")
-            .find(".td-status")
-            .find("span")
-            .removeClass("layui-btn-disabled")
-            .html("已启用");
-          layer.msg("已启用!", {
-            icon: 5,
-            time: 1000,
-          });
-        }
-      });
+      //     $(obj)
+      //       .parents("tr")
+      //       .find(".td-status")
+      //       .find("span")
+      //       .removeClass("layui-btn-disabled")
+      //       .html("已启用");
+      //     layer.msg("已启用!", {
+      //       icon: 5,
+      //       time: 1000,
+      //     });
+      //   }
+      // });
     });
 
     function displayStoredItems() {
@@ -323,17 +323,17 @@
           .join("");
 
         var rowHTML = `<tr>
-                                <td><input type="checkbox" name="" lay-skin="primary"></td>
-                                <td>${item.id}</td>
-                                <td>${item.name}</td>
-                                <td>${imgsHTML}</td>
-                                <td>待审核</td>
-                                <td class="td-manage">
-                                    <a title="查看" onclick="xadmin.open('编辑','order-view.html?id=${item.id}')" href="javascript:;">
-                                        <i class="layui-icon">&#xe63c;</i></a>
-                                    <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                        <i class="layui-icon">&#xe640;</i></a>
-                                </td>
+            <td><input type="checkbox" name="" lay-skin="primary"></td>
+            <td>${item.id}</td>
+            <td>${item.name}</td>
+            <td>${imgsHTML}</td>
+            <td>待审核</td>
+            <td class="td-manage">
+                <a title="查看" onclick="xadmin.open('编辑','order-view.html?id=${item.id}')" href="javascript:;">
+                    <i class="layui-icon">&#xe63c;</i></a>
+                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                    <i class="layui-icon">&#xe640;</i></a>
+            </td>
                            </tr>`;
         tbody.append(rowHTML);
       });
