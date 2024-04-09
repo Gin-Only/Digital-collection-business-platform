@@ -23,7 +23,7 @@
                     <div class="layui-card">
                         <div class="layui-card-body ">
                             <blockquote class="layui-elem-quote">欢迎管理员：
-                                <span class="x-red">test</span>！当前时间:2018-04-25 20:50:53
+                                <span class="x-red">a123</span>！当前时间:<span id="currentTime"></span>
                             </blockquote>
                         </div>
                     </div>
@@ -35,51 +35,51 @@
                             <ul class="layui-row layui-col-space10 layui-this x-admin-carousel x-admin-backlog">
                                 <li class="layui-col-md2 layui-col-xs6">
                                     <a href="javascript:;" class="x-admin-backlog-body">
-                                        <h3>文章数</h3>
+                                        <h3>藏品数</h3>
                                         <p>
                                             <cite>66</cite></p>
                                     </a>
                                 </li>
                                 <li class="layui-col-md2 layui-col-xs6">
                                     <a href="javascript:;" class="x-admin-backlog-body">
-                                        <h3>会员数</h3>
+                                        <h3>用户数</h3>
                                         <p>
                                             <cite>12</cite></p>
                                     </a>
                                 </li>
                                 <li class="layui-col-md2 layui-col-xs6">
                                     <a href="javascript:;" class="x-admin-backlog-body">
-                                        <h3>回复数</h3>
+                                        <h3>通过审核数</h3>
                                         <p>
                                             <cite>99</cite></p>
                                     </a>
                                 </li>
                                 <li class="layui-col-md2 layui-col-xs6">
                                     <a href="javascript:;" class="x-admin-backlog-body">
-                                        <h3>商品数</h3>
+                                        <h3>正在审核数</h3>
                                         <p>
                                             <cite>67</cite></p>
                                     </a>
                                 </li>
                                 <li class="layui-col-md2 layui-col-xs6">
                                     <a href="javascript:;" class="x-admin-backlog-body">
-                                        <h3>文章数</h3>
+                                        <h3>未通过审核数</h3>
                                         <p>
                                             <cite>67</cite></p>
                                     </a>
                                 </li>
-                                <li class="layui-col-md2 layui-col-xs6 ">
+                                <!-- <li class="layui-col-md2 layui-col-xs6 ">
                                     <a href="javascript:;" class="x-admin-backlog-body">
                                         <h3>文章数</h3>
                                         <p>
                                             <cite>6766</cite></p>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="layui-col-sm6 layui-col-md3">
+                <!-- <div class="layui-col-sm6 layui-col-md3">
                     <div class="layui-card">
                         <div class="layui-card-header">下载
                             <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
@@ -130,10 +130,10 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="layui-col-md12">
                     <div class="layui-card">
-                        <div class="layui-card-header">系统信息</div>
+                        <!-- <div class="layui-card-header">系统信息</div>
                         <div class="layui-card-body ">
                             <table class="layui-table">
                                 <tbody>
@@ -173,7 +173,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="layui-col-md12">
                     <div class="layui-card">
@@ -183,12 +183,12 @@
                                 <tbody>
                                     <tr>
                                         <th>版权所有</th>
-                                        <td>xuebingsi(xuebingsi)
-                                            <a href="http://x.xuebingsi.com/" target="_blank">访问官网</a></td>
+                                        <td>a123团队
+                                            </td>
                                     </tr>
                                     <tr>
                                         <th>开发者</th>
-                                        <td>马志斌(113664000@qq.com)</td></tr>
+                                        <td>a123团队</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -196,9 +196,29 @@
                 </div>
                 <style id="welcome_style"></style>
                 <div class="layui-col-md12">
-                    <blockquote class="layui-elem-quote layui-quote-nm">感谢layui,百度Echarts,jquery,本系统由x-admin提供技术支持。</blockquote></div>
+                    <blockquote class="layui-elem-quote layui-quote-nm">感谢layui,百度Echarts,jquery,本系统由a123团队提供技术支持。</blockquote></div>
             </div>
         </div>
         </div>
+        <script>
+            function updateCurrentTime() {
+                    var now = new Date();
+                    var hours = now.getHours();
+                    var minutes = now.getMinutes();
+                    var seconds = now.getSeconds();
+                    // 格式化时间，确保始终显示为两位数字
+                    hours = hours < 10 ? '0' + hours : hours;
+                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                    seconds = seconds < 10 ? '0' + seconds : seconds;
+                    var currentTime = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() + ' ' + hours + ':' + minutes + ':' + seconds;
+                    document.getElementById('currentTime').innerText = currentTime;
+                }
+                // 当页面加载完成后立即显示当前时间
+                window.onload = function () {
+                    updateCurrentTime();
+                    // 每隔1秒更新一次时间
+                    setInterval(updateCurrentTime, 1000);
+                };
+        </script>
     </body>
 </html>
