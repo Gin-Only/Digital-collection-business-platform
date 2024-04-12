@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>交易审核界面-X-admin2.2</title>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport"
+        content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="stylesheet" href="./css/font.css" />
+    <link rel="stylesheet" href="./css/xadmin.css" />
+    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/xadmin.js"></script>
+</head>
+
+<body>
+    <div class="x-nav">
+        <!-- 省略其他导航代码 -->
+    </div>
+    <div class="layui-fluid">
+        <div class="layui-row">
+            <div class="layui-card">
+                <div class="layui-card-body layui-table-body layui-table-main">
+                    <table class="layui-table layui-form">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>商户资质</th>
+                                <th>商品资质</th>
+                                <th>交易合法性</th>
+                                <th>用户身份信息</th>
+                                <!-- <th>操作</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="transactionTable">
+                            <!-- 通过JavaScript动态填充交易审核列表 -->
+                        </tbody>
+
+
+                    </table>
+                    <div class="layui-row" style="margin-top: 3rem;">
+                        <div class="layui-col-xs3">
+                            <div class="grid-demo grid-demo-bg1">&emsp;</div>
+                        </div>
+                        <div class="layui-col-xs3">
+                            <div class="grid-demo grid-demo-bg1">&emsp;</div>
+                        </div>
+                        <div class="layui-col-xs3">
+                            <div class="grid-demo grid-demo-bg1">&emsp;</div>
+                        </div>
+                        <div class="layui-col-xs3">
+                            <div class="grid-demo grid-demo-bg1" style="float: right;">
+                                <button type="button" class="layui-btn" id="confirmBtn"
+                                    onclick="handleConfirm()">确认</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        layui.use(['layer', 'form'], function () {
+            var layer = layui.layer;
+            var form = layui.form;
+            var $ = layui.jquery;
+            function getParam(a, data) {
+                //使用data获取传送过的obj参数
+                //在子页面关闭弹出层
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index); //再执行关闭
+            }
+            window.reviewTransaction = function (transactionId) {
+                // 查找transactionId对应的交易数据
+                var transaction = transactions.find(t => t.id === transactionId);
+
+                // 弹出审核窗口，展示交易数据并提供审核操作
+                layer.open({
+                    type: 1, // 使用页面层类型
+                    title: '交易审核',
+                    area: ['500px', '600px'],
+                    content: generateReviewForm(transaction) // 调用generateReviewForm函数生成表单内容
+                });
+            };
+            window.handleConfirm = function () {
+                getParam()
+            };
+
+            // 示例数据，假设已从服务器加载
+            var transactions = [
+                // 示例数据
+                { id: '1001', merchantQual: 'midadventure', productQual: '红楼梦虚拟画作', transactionLegality: '不合法', userIdentity: '小明(id:1)' },
+                { id: '2', merchantQual: '未验证', productQual: '不合格', transactionLegality: '非法', userIdentity: '未知' },
+                // ... 更多交易数据
+            ]
+            var transaction = transactions.find(t => t.id == localStorage.getItem('transactionId'));
+            // 动态填充表格数据
+            function fillTable() {
+                let arr = [{ ...transaction }]
+                var tbody = arr.map(function (transaction, index) {
+                    // <td><input type="checkbox" name="id" value="${transaction.id}" lay-skin="primary"></td>
+
+                    return `<tr>
+                <td>${transaction.id}</td>
+                <td>${transaction.merchantQual}</td>
+                <td>${transaction.productQual}</td>
+                <td>${transaction.transactionLegality}</td>
+                <td>${transaction.userIdentity}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="checkbox" name="xd1" id="xd1" lay-skin="switch" lay-text="通过|未通过" ${true ? 'checked' : ''}> </td>
+                <td><input type="checkbox" name="xd1" id="xd1" lay-skin="switch" lay-text="通过|未通过" ${true ? 'checked' : ''}> </td>
+                <td><input type="checkbox" name="xd1" id="xd1" lay-skin="switch" lay-text="通过|未通过" ${true ? 'checked' : ''}> </td>
+                <td><input type="checkbox" name="xd1" id="xd1" lay-skin="switch" lay-text="达标|不达标" ${true ? 'checked' : ''}> </td>
+            </tr>
+            `;
+                }).join('');
+
+                document.getElementById('transactionTable').innerHTML = tbody;
+                form.render(); // 重新渲染表单组件
+            }
+
+            // 生成审核表单的HTML字符串
+            function generateReviewForm(transaction) {
+                // 根据transaction对象中的值确定开关状态
+                var merchantQualSwitch = transaction.merchantQual === '已验证' ? 'checked' : '';
+                var productQualSwitch = transaction.productQual === '合格' ? 'checked' : '';
+                var transactionLegalitySwitch = transaction.transactionLegality === '合法' ? 'checked' : '';
+                var userIdentitySwitch = transaction.userIdentity === '已确认' ? 'checked' : '';
+
+                // 构建表单HTML
+                var formHtml = `
+            <form class="layui-form" style="margin: 20px;">
+                <!-- 构建各项开关，根据当前状态设置是否选中 -->
+                <!-- 其他表单项... -->
+                <div class="layui-form-item" style="text-align: center;">
+                    <button type="button" class="layui-btn" id="confirmBtn">确认</button>
+                </div>
+            </form>
+        `;
+
+                setTimeout(function () {
+                    // 绑定确认按钮点击事件以关闭窗口
+                    $('#confirmBtn').on('click', function () {
+                        layer.closeAll(); // 关闭弹出层
+                    });
+                }, 500); // 确保表单渲染完成后绑定事件
+
+                return formHtml;
+            }
+
+            fillTable(); // 填充表格数据
+        });
+    </script>
+
+</body>
+
+</html>
