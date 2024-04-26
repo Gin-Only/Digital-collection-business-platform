@@ -37,7 +37,7 @@
                     </div> -->
                 <div class="layui-form-item">
                     <label for="phone" class="layui-form-label">
-                        <span class="x-red">*</span>生成标签
+                        <span class="x-red">*</span>测试备注
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="phone" name="phone" required="" lay-verify="" autocomplete="off"
@@ -46,7 +46,7 @@
                 </div>
                 <div class="layui-form-item">
                     <label for="username" class="layui-form-label">
-                        <span class="x-red">*</span>测试备注
+                        <span class="x-red">*</span>生成标签
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="username" name="username" required="" lay-verify="required"
@@ -104,11 +104,11 @@
                 /*  console.log(data.field) */
                 var newItem = {
                     id: new Date().getTime(),
-                    tag: data.field.phone,  // 假设这是生成标签
-                    remark: data.field.username,  // 假设这是测试备注
-                    baseModel: data.field.shipping,  // 本体模型
-                    testModel: data.field.contrller,  // 测试模型
-                    description: data.field.desc  // 描述信息
+                    phone: data.field.phone,  // 生成标签
+                    username: data.field.username,  // 测试备注
+                    shipping: data.field.shipping,  // 本体模型
+                    contrller: data.field.contrller,  // 测试模型
+                    desc: data.field.desc  // 描述信息
                 };
                 storedData.push(newItem);
                 // 将合并后的数据存储到本地
@@ -119,12 +119,17 @@
 
                 layer.alert("增加成功", { icon: 6 }, function () {
                     /*  console.log("parent", parent); */
+                    
                     var frameIndex = parent.layer.getFrameIndex(window.name);
                     // console.log("frameIndex", frameIndex);
                     /* parent.displayStoredModels() */
-                    if (parent.displayStoredModels) {
+                    /* if (parent.displayStoredModels) {
                         parent.displayStoredModels();
-                    } else {
+                    } */
+                    if (parent.displayStoredItems) {
+                        parent.displayStoredItems();
+                    }
+                    else {
                         console.error('The displayStoredModels function is not defined on the parent page.');
                     }
                     var frameIndex = parent.layer.getFrameIndex(window.name);
