@@ -19,7 +19,7 @@
 本平台使用以下技术和框架构建：
 
 - **前端**：HTML5, CSS3, JavaScript, Layui
-- **后端**（假定）：Java
+- **后端**：Java, Python
 - **APIs**：RESTful API设计，确保前后端分离，提高系统的灵活性和可维护性。
 
 ## 安装指南
