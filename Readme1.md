@@ -19,30 +19,21 @@
 本平台使用以下技术和框架构建：
 
 - **前端**：HTML5, CSS3, JavaScript, Layui
-- **后端**（假定）：Node.js, Express, MongoDB
+- **后端**（假定）：Java
 - **APIs**：RESTful API设计，确保前后端分离，提高系统的灵活性和可维护性。
 
 ## 安装指南
 
-以下是在本地环境部署和运行该项目的步骤：
-
 1. 克隆仓库：
    ```bash
-   git clone https://github.com/yourusername/digital-collection-management-platform.git
+   git clone https://github.com/Gin-Only/Digital-collection-business-platform.git
    ```
 2. 安装依赖：
    ```bash
-   cd digital-collection-management-platform
+   cd Digital-collection-business-platform
    npm install
    ```
-3. 启动服务器：
-   ```bash
-   npm start
-   ```
-4. 在浏览器中访问：
-   ```
-   http://localhost:3000
-   ```
+
 
 ## 使用指南
 
